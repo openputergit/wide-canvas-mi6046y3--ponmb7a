@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartChef - AI-Powered Recipe Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="gradient-bg text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">SmartChef</h1>
+            <div class="space-x-4">
+                <button class="hover:text-gray-200"><i class="bi bi-person-circle"></i> Profile</button>
+                <button class="hover:text-gray-200"><i class="bi bi-gear"></i> Settings</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- AI Search Section -->
+        <div class="mb-8">
+            <div class="relative max-w-2xl mx-auto">
+                <input type="text" id="recipe-search" placeholder="Search recipes or ask AI for suggestions..." 
+                       class="w-full p-4 rounded-lg shadow-md pl-12 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <i class="bi bi-search absolute left-4 top-4 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Smart Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                <i class="bi bi-camera text-4xl text-blue-500"></i>
+                <h3 class="text-xl font-semibold mt-4">Pantry Scanner</h3>
+                <p class="text-gray-600 mt-2">Scan your ingredients and get recipe suggestions</p>
+                <button onclick="scanPantry()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    Scan Now
+                </button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                <i class="bi bi-calendar-check text-4xl text-blue-500"></i>
+                <h3 class="text-xl font-semibold mt-4">Meal Planner</h3>
+                <p class="text-gray-600 mt-2">AI-powered weekly meal planning</p>
+                <button onclick="openMealPlanner()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    Plan Meals
+                </button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                <i class="bi bi-cart text-4xl text-blue-500"></i>
+                <h3 class="text-xl font-semibold mt-4">Shopping List</h3>
+                <p class="text-gray-600 mt-2">Auto-generated grocery lists</p>
+                <button onclick="viewShoppingList()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    View List
+                </button>
+            </div>
+        </div>
+
+        <!-- Recipe Timer -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h3 class="text-xl font-semibold mb-4">Recipe Timer</h3>
+            <div class="flex items-center space-x-4">
+                <input type="number" id="minutes" min="0" max="180" value="0" class="w-20 p-2 border rounded">
+                <button onclick="startTimer()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    Start Timer
+                </button>
+                <div id="timer-display" class="text-2xl font-semibold">00:00</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let timerInterval;
+
+        function scanPantry() {
+            // Simulated pantry scanning functionality
+            alert("Scanning pantry... (This would activate device camera in production)");
+        }
+
+        function openMealPlanner() {
+            // Simulated meal planner functionality
+            alert("Opening meal planner... (This would show a calendar view with AI suggestions in production)");
+        }
+
+        function viewShoppingList() {
+            // Simulated shopping list functionality
+            alert("Loading shopping list... (This would show your auto-generated grocery list in production)");
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            const minutes = parseInt(document.getElementById('minutes').value);
+            let totalSeconds = minutes * 60;
+
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Timer finished!");
+                    document.getElementById('timer-display').textContent = "00:00";
+                    return;
+                }
+
+                const minutesDisplay = Math.floor(totalSeconds / 60);
+                const secondsDisplay = totalSeconds % 60;
+                document.getElementById('timer-display').textContent = 
+                    `${String(minutesDisplay).padStart(2, '0')}:${String(secondsDisplay).padStart(2, '0')}`;
+                totalSeconds--;
+            }, 1000);
+        }
+
+        // AI Search functionality
+        document.getElementById('recipe-search').addEventListener('input', (e) => {
+            // In production, this would make API calls to an AI service
+            console.log("Searching for:", e.target.value);
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
